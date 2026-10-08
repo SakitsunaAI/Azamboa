@@ -541,16 +541,10 @@ endif()
 
 if ("x86_64" IN_LIST ARCHITECTURE OR "arm64" IN_LIST ARCHITECTURE)
     target_sources(citra_core PRIVATE
-        arm/dynarmic/arm_dynarmic.cpp
-        arm/dynarmic/arm_dynarmic.h
-        arm/dynarmic/arm_dynarmic_cp15.cpp
-        arm/dynarmic/arm_dynarmic_cp15.h
-        arm/dynarmic/arm_exclusive_monitor.cpp
-        arm/dynarmic/arm_exclusive_monitor.h
-        arm/dynarmic/arm_tick_counts.cpp
-        arm/dynarmic/arm_tick_counts.h
+        arm/recomp/arm_recomp.cpp
+        arm/recomp/arm_recomp.h
+        arm/recomp/recomp.h
     )
-    target_link_libraries(citra_core PRIVATE dynarmic)
 endif()
 
 if (CITRA_USE_PRECOMPILED_HEADERS)

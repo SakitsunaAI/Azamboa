@@ -272,10 +272,10 @@ if (ENABLE_NATIVE_OPTIMIZATION)
     CHECK_CXX_COMPILER_FLAG("-march=native" CXX_COMPILER_SUPPORTS_MARCH_NATIVE)
 
     if (C_COMPILER_SUPPORTS_MARCH_NATIVE)
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=native")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -flto=thin -march=native -mtune=native -fomit-frame-pointer -ffast-math -ftree-vectorize")
     endif()
     if (CXX_COMPILER_SUPPORTS_MARCH_NATIVE)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -flto=thin -march=native -mtune=native -fomit-frame-pointer -ffast-math -ftree-vectorize")
     endif()
 endif()
 
@@ -412,8 +412,11 @@ if (ENABLE_QT)
     message(STATUS "Using host Qt at ${QT_HOST_PATH}")
 endif()
 
-# Use system tsl::robin_map if available (otherwise we fallback to version bundled with dynarmic)
+# Use system tsl::robin_map if available (otherwise we fallback to externals)
 find_package(tsl-robin-map QUIET)
+if (NOT TARGET tsl::robin_map)
+    add_subdirectory(externals/tsl-robin-map EXCLUDE_FROM_ALL)
+endif()
 
 # Platform-specific library requirements
 # ======================================

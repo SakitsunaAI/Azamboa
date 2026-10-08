@@ -18,7 +18,7 @@
 #include "core/hle/service/hid/hid.h"
 #include "core/hle/service/ir/ir_user.h"
 #if CITRA_ARCH(x86_64) || CITRA_ARCH(arm64)
-#include "core/arm/dynarmic/arm_dynarmic.h"
+#include "core/arm/recomp/arm_recomp.h"
 #endif
 #include "core/arm/dyncom/arm_dyncom.h"
 #include "core/cheats/cheats.h"
@@ -547,8 +547,8 @@ System::ResultStatus System::Init(Frontend::EmuWindow& emu_window,
     if (Settings::values.use_cpu_jit) {
 #if CITRA_ARCH(x86_64) || CITRA_ARCH(arm64)
         for (u32 i = 0; i < num_cores; ++i) {
-            cpu_cores.push_back(std::make_shared<ARM_Dynarmic>(
-                *this, *memory, i, timing->GetTimer(i), *exclusive_monitor));
+            cpu_cores.push_back(
+                std::make_shared<ARM_Recomp>(*this, *memory, i, timing->GetTimer(i)));
         }
 #else
         for (u32 i = 0; i < num_cores; ++i) {
