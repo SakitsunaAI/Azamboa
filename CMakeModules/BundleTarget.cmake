@@ -84,7 +84,7 @@ if (BUNDLE_TARGET_EXECUTE)
 
             message(STATUS "Executing macdeployqt at \"${macdeployqt_executable}\" for executable \"${executable_path}\"")
             execute_process(
-                COMMAND "${macdeployqt_executable}"
+                COMMAND "${macdeployqt_executable}" "-libpath=${QT_HOST_PATH}/lib" "-always-overwrite"
                 "${executable_path}"
                 "-executable=${executable_path}/Contents/MacOS/${executable_name}"
                 -always-overwrite

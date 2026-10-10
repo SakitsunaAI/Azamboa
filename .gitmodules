@@ -112,3 +112,6 @@
 [submodule "externals/Anylinux-AppImages"]
 	path = externals/Anylinux-AppImages
 	url = https://github.com/pkgforge-dev/Anylinux-AppImages.git
+[submodule "externals/tsl-robin-map"]
+	path = externals/tsl-robin-map
+	url = https://github.com/Tessil/robin-map.git

@@ -105,8 +105,8 @@ if (CITRA_USE_PRECOMPILED_HEADERS)
     target_precompile_headers(citra_meta PRIVATE precompiled_headers.h)
 endif()
 
-# Bundle in-place on MSVC so dependencies can be resolved by builds.
-if (ENABLE_QT AND MSVC)
+# Bundle in-place on MSVC and APPLE so dependencies can be resolved by builds.
+if (ENABLE_QT AND (MSVC OR APPLE))
     include(BundleTarget)
     qt_bundle_target_in_place(citra_meta)
 endif()
